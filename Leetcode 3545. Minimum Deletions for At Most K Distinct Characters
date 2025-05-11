@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int minDeletion(string s, int k) {
+        
+         map<char, int>mp;
+
+        int sum = 0 , c = 0;
+         for(char ch : s){
+            mp[ch]++;
+         }
+
+         if(mp.size() < k){
+            return 0;
+         }
+         vector<pair<char , int>>pq(mp.begin() , mp.end());
+
+         sort(pq.begin() , pq.end() , [&] (pair<char , int> &a , pair<char , int> &b){
+              return (a.second > b.second);
+         });
+       
+       for(int i = 0 ; i < k ; i++){
+         sum += pq[i].second;
+       }
+
+       return s.size() - sum;
+
+    }
+};
